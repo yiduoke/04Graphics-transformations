@@ -14,7 +14,7 @@ as the translation offsets.
 ====================*/
 struct matrix * make_translate(double x, double y, double z) {
   struct matrix* translate = new_matrix(4, 4);
-  m->lastcol = m->cols;
+  translate->lastcol = translate->cols;
 
   int i;
   int j;
@@ -37,7 +37,7 @@ as the scale factors
 ====================*/
 struct matrix * make_scale(double x, double y, double z) {
   struct matrix* dilate = new_matrix(4, 4);
-  m->lastcol = m->cols;
+  dilate->lastcol = dilate->cols;
 
   dilate->m[0][0] = x;
   dilate->m[1][1] = y;
@@ -53,7 +53,6 @@ float deg_to_rad(double degree){
 
 /*======== struct matrix * make_rotX() ==========
 Inputs:  double theta
-
 Returns: The rotation matrix created using theta as the 
 angle of rotation and X as the axis of rotation.
 ====================*/
@@ -61,13 +60,13 @@ struct matrix * make_rotX(double theta) {
   theta = deg_to_rad(theta);
 
   struct matrix* rotate = new_matrix(4, 4);
-  m->lastcol = m->cols;
+  rotate->lastcol = rotate->cols;
 
   int i;
   int j;
   for (i = 0; i < 4; i++){
     for (j = 0; j < 4; j++){
-      m[i][j] = 0;
+      rotate->m[i][j] = 0;
     }
   }
   rotate->m[1][1] = cos(theta);
@@ -90,13 +89,13 @@ struct matrix * make_rotY(double theta) {
   theta = deg_to_rad(theta);
 
   struct matrix* rotate = new_matrix(4, 4);
-  m->lastcol = m->cols;
+  rotate->lastcol = rotate->cols;
 
   int i;
   int j;
   for (i = 0; i < 4; i++){
     for (j = 0; j < 4; j++){
-      m[i][j] = 0;
+      rotate->m[i][j] = 0;
     }
   }
 
@@ -120,13 +119,13 @@ struct matrix * make_rotZ(double theta) {
   theta = deg_to_rad(theta);
 
   struct matrix* rotate = new_matrix(4, 4);
-  m->lastcol = m->cols;
+  rotate->lastcol = rotate->cols;
 
   int i;
   int j;
   for (i = 0; i < 4; i++){
     for (j = 0; j < 4; j++){
-      m[i][j] = 0;
+      rotate->m[i][j] = 0;
     }
   }
   rotate->m[0][0] = cos(theta);
@@ -143,7 +142,6 @@ struct matrix * make_rotZ(double theta) {
 /*-------------- void print_matrix() --------------
 Inputs:  struct matrix *m 
 Returns: 
-
 print the matrix
 */
 void print_matrix(struct matrix *m) {
@@ -159,7 +157,6 @@ void print_matrix(struct matrix *m) {
 /*-------------- void ident() --------------
 Inputs:  struct matrix *m <-- assumes m is a square matrix
 Returns: 
-
 turns m in to an identity matrix
 */
 void ident(struct matrix *m) {
@@ -179,7 +176,6 @@ void ident(struct matrix *m) {
 Inputs:  struct matrix *a
          struct matrix *b 
 Returns: 
-
 a*b -> b
 */
 void matrix_mult(struct matrix *a, struct matrix *b) {
@@ -211,7 +207,6 @@ void matrix_mult(struct matrix *a, struct matrix *b) {
 Inputs:  int rows
          int cols 
 Returns: 
-
 Once allocated, access the matrix as follows:
 m->m[r][c]=something;
 if (m->lastcol)... 
@@ -239,7 +234,6 @@ struct matrix *new_matrix(int rows, int cols) {
 /*-------------- void free_matrix() --------------
 Inputs:  struct matrix *m 
 Returns: 
-
 1. free individual rows
 2. free array holding row pointers
 3. free actual matrix
@@ -259,7 +253,6 @@ void free_matrix(struct matrix *m) {
 Inputs:  struct matrix *m
          int newcols 
 Returns: 
-
 Reallocates the memory for m->m such that it now has
 newcols number of collumns
 ====================*/
@@ -277,7 +270,6 @@ void grow_matrix(struct matrix *m, int newcols) {
 Inputs:  struct matrix *a
          struct matrix *b 
 Returns: 
-
 copy matrix a to matrix b
 */
 void copy_matrix(struct matrix *a, struct matrix *b) {
