@@ -52,10 +52,32 @@ humans use degrees, so the file will contain degrees for rotations,
 be sure to conver those degrees to radians (M_PI is the constant
 for PI)
 ====================*/
+char ** parse_args( char * line ){
+  char ** output = (char**)calloc(5, sizeof("ugaediwbdhadkhwd"));
+  int i=0;
+  while (line){
+      char * str = strsep(&line," ");
+      output[i]= str;
+      i++;
+  }
+  return output;
+}
+
+// line: add a line to the point matrix -  takes 6 arguemnts (x0, y0, z0, x1, y1, z1)
+// ident: set the transform matrix to the identity matrix
+// scale: create a scale matrix, then multiply the transform matrix by the scale matrix -  takes 3 arguments (sx, sy, sz)
+// move: create a translation matrix, then multiply the transform matrix by the translation matrix - takes 3 arguments (tx, ty, tz)
+// rotate: create a rotation matrix, then multiply the transform matrix by the rotation matrix - takes 2 arguments (axis theta)
+// apply: apply the current transformation matrix to the edge matrix
+// display: draw the lines of the point matrix to the screen, display the screen
+// save: draw the lines of the point matrix to the screen/frame save the screen/frame to a file - takes 1 argument (file name)
+
 void parse_file ( char * filename, 
                   struct matrix * transform, 
                   struct matrix * edges,
                   screen s) {
+  char state[40];
+  strcpy(state, "nothing");
 
   FILE *f;
   char line[256];
@@ -68,6 +90,24 @@ void parse_file ( char * filename,
   
   while ( fgets(line, 255, f) != NULL ) {
     line[strlen(line)-1]='\0';
-    printf(":%s:\n",line);
+    // printf(":%s:\n",line);
+    if (strncmp(line, "line", 4)){
+      strcpy(state, "line");
+    }
+    else if(strncmp(line, "scale", 5)){
+      strcpy(state, "scale");
+    }
+    else if(strncmp(line, "move", 4)){
+      strcpy(state, "move");
+    }
+    else if(strncmp(line, "rotate", 6)){
+      strcpy(state, "rotate");
+    }
+    char ** args = parse_args(line);
+
+    int i;
+    for (i = 0; i< 1; i++){
+      // printf("%s\n", args[i]);
+    }
   }
 }

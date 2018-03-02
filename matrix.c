@@ -17,7 +17,6 @@ struct matrix * make_translate(double x, double y, double z) {
   translate->lastcol = translate->cols;
 
   int i;
-  int j;
   for (i = 0; i < 4; i++){
     translate->m[i][i] = 1;
   }
