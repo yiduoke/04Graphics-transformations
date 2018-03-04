@@ -120,6 +120,7 @@ void parse_file ( char * filename,
     }
     else if(!strncmp(line, "apply", 5)){
       matrix_mult(transform, edges);
+      clear_screen(s);
     }
     else if(!strncmp(line, "display", 7)){
       draw_lines(edges, s, c);
