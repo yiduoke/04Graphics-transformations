@@ -126,29 +126,32 @@ void parse_file ( char * filename,
       draw_lines(edges, s, c);
       display(s);
     }
+    else if(!strncmp(line, "quit", 4)){
+      break;
+    }
     else{
-      if(!strncmp(state, "line", 4) && strcmp(line, "line")){
+      if(!strncmp(state, "line", 4)){
 
         int x0, y0, z0, x1, y1, z1;
         sscanf( line, "%d %d %d %d %d %d", &x0, &y0, &z0, &x1, &y1, &z1 );
         add_edge(edges, x0, y0, z0, x1, y1, z1);
         strcpy(state, "nothing");
       }
-      else if(!strncmp(state, "scale", 5) && strcmp(line, "scale")){
+      else if(!strncmp(state, "scale", 5)){
 
         int x, y, z;
         sscanf( line, "%d %d %d", &x, &y, &z);
         matrix_mult(make_scale(x, y, z), transform);
         strcpy(state, "nothing");
       }
-      else if(!strncmp(state, "translate", 9) && strcmp(line, "translate")){
+      else if(!strncmp(state, "translate", 9)){
 
         int x, y, z;
         sscanf( line, "%d %d %d", &x, &y, &z);
         matrix_mult(make_translate(x, y, z), transform);
         strcpy(state, "nothing");
       }
-      else if(!strncmp(state, "rotate", 6) && strcmp(line, "rotate")){
+      else if(!strncmp(state, "rotate", 6)){
 
         char axis[1];
         int theta;
@@ -165,7 +168,7 @@ void parse_file ( char * filename,
         }
         strcpy(state, "nothing");
       }
-      else if(!strncmp(state, "save", 4) && strcmp(line, "save")){
+      else if(!strncmp(state, "save", 4)){
 
         char file[100];
         sscanf( line, "%s", file);
