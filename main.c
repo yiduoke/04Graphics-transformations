@@ -30,6 +30,14 @@ int main(int argc, char **argv) {
     parse_file( "stdin", transform, edges, s );
   }
 
+  // add_edge(edges, 100,100,0,100,400,0);
+  // add_edge(edges, 100,400,0,400,400,0);
+  // add_edge(edges, 400,400,0,400,100,0);
+  // add_edge(edges, 400,100,0,100,100,0);
+  // matrix_mult(make_scale(1.5, 1.5, 1.5), transform);
+  // matrix_mult(transform, edges);
+  // draw_lines(edges, s, c);
+
   display(s);
 	save_extension(s, "trans.png");
   free_matrix( edges );

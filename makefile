@@ -5,7 +5,8 @@ CC= gcc
 
 all: $(OBJECTS)
 	$(CC) -o main $(OBJECTS) $(LDFLAGS)
-	
+	./main script
+
 run: main
 	./main script
 
