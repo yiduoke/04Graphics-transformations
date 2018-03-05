@@ -139,8 +139,8 @@ void parse_file ( char * filename,
       }
       else if(!strncmp(state, "scale", 5)){
 
-        int x, y, z;
-        sscanf( line, "%d %d %d", &x, &y, &z);
+        float x, y, z;
+        sscanf( line, "%f %f %f", &x, &y, &z);
         matrix_mult(make_scale(x, y, z), transform);
         strcpy(state, "nothing");
       }
