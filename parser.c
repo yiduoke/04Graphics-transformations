@@ -132,8 +132,8 @@ void parse_file ( char * filename,
     else{
       if(!strncmp(state, "line", 4)){
 
-        int x0, y0, z0, x1, y1, z1;
-        sscanf( line, "%d %d %d %d %d %d", &x0, &y0, &z0, &x1, &y1, &z1 );
+        float x0, y0, z0, x1, y1, z1;
+        sscanf( line, "%f %f %f %f %f %f", &x0, &y0, &z0, &x1, &y1, &z1 );
         add_edge(edges, x0, y0, z0, x1, y1, z1);
         strcpy(state, "nothing");
       }
@@ -146,16 +146,16 @@ void parse_file ( char * filename,
       }
       else if(!strncmp(state, "translate", 9)){
 
-        int x, y, z;
-        sscanf( line, "%d %d %d", &x, &y, &z);
+        float x, y, z;
+        sscanf( line, "%f %f %f", &x, &y, &z);
         matrix_mult(make_translate(x, y, z), transform);
         strcpy(state, "nothing");
       }
       else if(!strncmp(state, "rotate", 6)){
 
         char axis[1];
-        int theta;
-        sscanf( line, "%s %d", axis, &theta);
+        float theta;
+        sscanf( line, "%s %f", axis, &theta);
 
         if (!strncmp(axis, "x", 1)){
           matrix_mult(make_rotX(theta), transform);
